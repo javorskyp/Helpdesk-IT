@@ -36,6 +36,9 @@ public class TicketEntity {
 	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<TicketCommentEntity> comments = new ArrayList<>();
 
+	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<TicketAttachmentEntity> attachments = new ArrayList<>();
+
 	public TicketEntity(String title, String description) {
 		this.title = title;
 		this.description = description;
@@ -44,5 +47,10 @@ public class TicketEntity {
 	public void addComment(TicketCommentEntity comment) {
 		comments.add(comment);
 		comment.setTicket(this);
+	}
+
+	public void addAttachment(TicketAttachmentEntity attachment) {
+		attachments.add(attachment);
+		attachment.setTicket(this);
 	}
 }

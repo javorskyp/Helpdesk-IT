@@ -16,4 +16,5 @@ public class TicketDto {
 	private String title;
 	private String description;
 	private List<TicketCommentDto> comments = new ArrayList<>();
+	private List<TicketAttachmentDto> attachments = new ArrayList<>();
 }

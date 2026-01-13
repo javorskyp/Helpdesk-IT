@@ -1,5 +1,6 @@
 package com.example.helpdesk.business.ticket.control;
 
+import com.example.helpdesk.business.ticket.model.TicketAttachmentDto;
 import com.example.helpdesk.business.ticket.model.TicketCommentDto;
 import com.example.helpdesk.business.ticket.model.TicketDto;
 import com.example.helpdesk.business.ticket.model.TicketEntity;
@@ -14,6 +15,10 @@ class TicketMapper {
 			.stream()
 			.map(comment -> new TicketCommentDto(comment.getId(), comment.getContent()))
 			.toList();
-		return new TicketDto(ticket.getId(), ticket.getTitle(), ticket.getDescription(), comments);
+		List<TicketAttachmentDto> attachments = ticket.getAttachments()
+			.stream()
+			.map(attachment -> new TicketAttachmentDto(attachment.getId(), attachment.getFileId()))
+			.toList();
+		return new TicketDto(ticket.getId(), ticket.getTitle(), ticket.getDescription(), comments, attachments);
 	}
 }

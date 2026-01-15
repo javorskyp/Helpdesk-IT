@@ -23,3 +23,9 @@ helpdesk:
     azure:
       connection-string: ${BLOB_STORAGE_CONNECTION_STRING:}
       container: helpdesk-files
+  mail:
+    whitelist: [01169622@pw.edu.pl]
+
+logging:
+  level:
+    com.example.helpdesk: DEBUG

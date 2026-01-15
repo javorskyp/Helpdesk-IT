@@ -20,3 +20,6 @@ spring:
 helpdesk:
   storage:
     local-root: ${user.home}/helpdesk-storage
+    azure:
+      connection-string: ${BLOB_STORAGE_CONNECTION_STRING:}
+      container: helpdesk-files

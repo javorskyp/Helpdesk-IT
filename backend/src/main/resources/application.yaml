@@ -24,7 +24,11 @@ helpdesk:
       connection-string: ${BLOB_STORAGE_CONNECTION_STRING:}
       container: helpdesk-files
   mail:
-    whitelist: [01169622@pw.edu.pl]
+    whitelist: [ 01169622@pw.edu.pl ]
+    azure:
+      endpoint: ${MAIL_ENDPOINT:}
+      access-key: ${MAIL_ACCESS_KEY:}
+      sender: DoNotReply@00ccb4ec-c916-4ce0-902c-e3c6dda9140b.azurecomm.net
 
 logging:
   level:

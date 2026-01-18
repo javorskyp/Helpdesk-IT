@@ -38,6 +38,10 @@ public class UserEntity implements UserDetails {
     @ToString.Exclude
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptyList();

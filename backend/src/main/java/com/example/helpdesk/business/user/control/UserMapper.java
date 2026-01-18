@@ -1,6 +1,7 @@
 package com.example.helpdesk.business.user.control;
 
 import com.example.helpdesk.business.user.model.RegisterUserRequest;
+import com.example.helpdesk.business.user.model.Role;
 import com.example.helpdesk.business.user.model.User;
 import com.example.helpdesk.business.user.model.UserEntity;
 import com.example.helpdesk.system.security.control.SecurePasswordManager;
@@ -18,6 +19,7 @@ public class UserMapper {
                 .password(securePasswordManager.encodePassword(registerUserRequest.password()))
                 .firstName(registerUserRequest.firstName())
                 .lastName(registerUserRequest.lastName())
+                .role(Role.USER)
                 .build();
     }
 
@@ -26,6 +28,7 @@ public class UserMapper {
                 .email(user.getEmail())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
+                .role(user.getRole().name())
                 .build();
     }
 

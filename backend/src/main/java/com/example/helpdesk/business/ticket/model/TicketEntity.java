@@ -1,13 +1,6 @@
 package com.example.helpdesk.business.ticket.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,34 +16,41 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TicketEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(nullable = false)
-	private String title;
+    @Column(nullable = false)
+    private String title;
 
-	@Column(nullable = false)
-	private String description;
+    @Column(nullable = false)
+    private String description;
 
-	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<TicketCommentEntity> comments = new ArrayList<>();
+    @Column(nullable = false)
+    private String status;
 
-	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<TicketAttachmentEntity> attachments = new ArrayList<>();
+    @Column
+    private Integer rating;
 
-	public TicketEntity(String title, String description) {
-		this.title = title;
-		this.description = description;
-	}
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TicketCommentEntity> comments = new ArrayList<>();
 
-	public void addComment(TicketCommentEntity comment) {
-		comments.add(comment);
-		comment.setTicket(this);
-	}
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TicketAttachmentEntity> attachments = new ArrayList<>();
 
-	public void addAttachment(TicketAttachmentEntity attachment) {
-		attachments.add(attachment);
-		attachment.setTicket(this);
-	}
+    public TicketEntity(String title, String description) {
+        this.title = title;
+        this.description = description;
+        this.status = "WAITING_FOR_ADMIN_RESPONSE";
+    }
+
+    public void addComment(TicketCommentEntity comment) {
+        comments.add(comment);
+        comment.setTicket(this);
+    }
+
+    public void addAttachment(TicketAttachmentEntity attachment) {
+        attachments.add(attachment);
+        attachment.setTicket(this);
+    }
 }

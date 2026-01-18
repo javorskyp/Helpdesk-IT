@@ -1,7 +1,9 @@
 package com.example.helpdesk.business.ticket.control;
 
 import com.example.helpdesk.business.ticket.model.*;
+import com.example.helpdesk.business.user.model.UserEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -16,7 +18,8 @@ class DefaultTicketOperation implements TicketOperation {
     @Override
     @Transactional
     public TicketDto createTicket(CreateTicketRequest request) {
-        TicketEntity ticket = new TicketEntity(request.getTitle(), request.getDescription());
+        UserEntity currentUser = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        TicketEntity ticket = new TicketEntity(request.getTitle(), request.getDescription(), currentUser);
         TicketEntity saved = ticketRepository.save(ticket);
         return ticketMapper.toDto(saved);
     }
@@ -41,6 +44,16 @@ class DefaultTicketOperation implements TicketOperation {
     @Transactional(readOnly = true)
     public List<TicketDto> listTickets() {
         return ticketRepository.findAll()
+                .stream()
+                .map(ticketMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<TicketDto> listTicketsForCurrentUser() {
+        UserEntity currentUser = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ticketRepository.findByUser(currentUser)
                 .stream()
                 .map(ticketMapper::toDto)
                 .toList();

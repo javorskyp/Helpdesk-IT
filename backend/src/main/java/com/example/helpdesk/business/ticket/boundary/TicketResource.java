@@ -28,6 +28,11 @@ public class TicketResource {
         return ticketOperation.listTickets();
     }
 
+    @GetMapping("/current")
+    public List<TicketDto> listTicketsForCurrentUser() {
+        return ticketOperation.listTicketsForCurrentUser();
+    }
+
     @GetMapping("/{ticketId}")
     public TicketDto getTicket(@PathVariable long ticketId) {
         return ticketOperation.getTicket(ticketId);

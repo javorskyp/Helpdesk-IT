@@ -18,6 +18,8 @@ public interface TicketOperation {
 
 	List<TicketDto> listTickets();
 
+	List<TicketDto> listTicketsForCurrentUser();
+
 	TicketDto updateStatus(long ticketId, UpdateTicketStatusRequest request);
 
 	TicketDto addRating(long ticketId, TicketRatingRequest request);

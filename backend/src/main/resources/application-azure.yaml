@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://puch-projekt.database.windows.net:1433;databaseName=db_main;encrypt=true;trustServerCertificate=false;loginTimeout=30
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+helpdesk:
+  storage:
+    azure:
+      connection-string: ${BLOB_STORAGE_CONNECTION_STRING:}
+      container: helpdesk-files
+  mail:
+    whitelist: [ 01169622@pw.edu.pl ]
+    azure:
+      endpoint: ${MAIL_ENDPOINT:}
+      access-key: ${MAIL_ACCESS_KEY:}
+      sender: DoNotReply@00ccb4ec-c916-4ce0-902c-e3c6dda9140b.azurecomm.net

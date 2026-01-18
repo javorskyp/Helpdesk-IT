@@ -18,6 +18,14 @@ spring:
       path: /h2-console
 
 helpdesk:
+  jwt:
+    secret: ${JWT_SECRET}
+    access-expiration: 300000
+    refresh-expiration: 3600000
+  cors:
+    allowed-origins: http://localhost:5173,https://localhost:5173
+  pepper:
+    value: ${PEPPER}
   storage:
     local-root: ${user.home}/helpdesk-storage
     azure:

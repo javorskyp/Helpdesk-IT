@@ -5,10 +5,12 @@ import com.example.helpdesk.business.user.model.UserRepository;
 import com.example.helpdesk.system.security.boundary.Authenticator;
 import com.example.helpdesk.system.security.control.JwtUtils;
 import com.example.helpdesk.system.security.control.SecurePasswordManager;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableConfigurationProperties(AdminUserProperties.class)
 class UserConfiguration {
 
     @Bean

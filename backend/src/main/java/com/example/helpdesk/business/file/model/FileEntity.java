@@ -34,14 +34,10 @@ public class FileEntity {
 	@Column(nullable = false)
 	private long size;
 
-	@Column(nullable = false)
-	private Long ticketId;
-
-	public FileEntity(String storageKey, String filename, String contentType, long size, Long ticketId) {
+	public FileEntity(String storageKey, String filename, String contentType, long size) {
 		this.storageKey = storageKey;
 		this.filename = filename;
 		this.contentType = contentType;
 		this.size = size;
-		this.ticketId = ticketId;
 	}
 }

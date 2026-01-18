@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TicketAttachmentDto {
 
-	private Long id;
 	private Long fileId;
+	private String filename;
 }

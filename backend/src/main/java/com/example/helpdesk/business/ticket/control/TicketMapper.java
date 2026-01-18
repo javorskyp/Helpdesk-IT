@@ -16,7 +16,9 @@ class TicketMapper {
                 .toList();
         List<TicketAttachmentDto> attachments = ticket.getAttachments()
                 .stream()
-                .map(attachment -> new TicketAttachmentDto(attachment.getId(), attachment.getFileId()))
+                .map(attachment -> new TicketAttachmentDto(
+                        attachment.getFileId(),
+                        attachment.getFilename()))
                 .toList();
         return new TicketDto(
                 ticket.getId(),

@@ -28,11 +28,15 @@ public class TicketAttachmentEntity {
 	@Column(nullable = false)
 	private Long fileId;
 
+	@Column(nullable = false)
+	private String filename;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ticket_id", nullable = false)
 	private TicketEntity ticket;
 
-	public TicketAttachmentEntity(Long fileId) {
+	public TicketAttachmentEntity(Long fileId, String filename) {
 		this.fileId = fileId;
+		this.filename = filename;
 	}
 }

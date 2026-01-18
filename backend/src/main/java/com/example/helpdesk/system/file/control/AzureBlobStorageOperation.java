@@ -34,8 +34,8 @@ class AzureBlobStorageOperation implements FileStorageOperation {
             throw new IllegalArgumentException("Azure Blob container name is required");
         }
         BlobServiceClient serviceClient = new BlobServiceClientBuilder()
-            .connectionString(connectionString)
-            .buildClient();
+                .connectionString(connectionString)
+                .buildClient();
         this.containerClient = serviceClient.getBlobContainerClient(containerName);
         if (!this.containerClient.exists()) {
             this.containerClient.create();
@@ -57,7 +57,7 @@ class AzureBlobStorageOperation implements FileStorageOperation {
         BlobHttpHeaders headers = new BlobHttpHeaders().setContentType(contentType);
         try (InputStream inputStream = file.getInputStream()) {
             BlobParallelUploadOptions options = new BlobParallelUploadOptions(inputStream, file.getSize())
-                .setHeaders(headers);
+                    .setHeaders(headers);
             blobClient.uploadWithResponse(options, null, null);
         } catch (IOException ex) {
             throw new UncheckedIOException("Cannot store file", ex);
@@ -90,23 +90,7 @@ class AzureBlobStorageOperation implements FileStorageOperation {
     }
 
     private String resolveStorageKey(long ticketId, String filename) {
-        String key = "ticket" + ticketId + "/" + filename;
-        BlobClient blobClient = containerClient.getBlobClient(key);
-        if (!blobClient.exists()) {
-            return key;
-        }
-        String uniqueName = uniqueFilename(filename);
-        return "ticket" + ticketId + "/" + uniqueName;
+        return "ticket" + ticketId + "/" + filename + "-" + UUID.randomUUID() + "/" + filename;
     }
 
-    private String uniqueFilename(String filename) {
-        String base = filename;
-        String extension = "";
-        int dotIndex = filename.lastIndexOf('.');
-        if (dotIndex > 0 && dotIndex < filename.length() - 1) {
-            base = filename.substring(0, dotIndex);
-            extension = filename.substring(dotIndex);
-        }
-        return base + "-" + UUID.randomUUID() + extension;
-    }
 }

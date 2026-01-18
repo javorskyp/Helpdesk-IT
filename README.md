@@ -2,6 +2,13 @@
 
 ## Zmienne srodowiskowe
 
+Wymagane dla kazdego profilu:
+
+- `JWT_SECRET` - sekret do podpisywania tokenow JWT.
+- `PEPPER` - dodatkowa wartosc do haszowania hasel.
+- `CORS_ALLOWED_ORIGINS` - lista dozwolonych originow (rozdzielona przecinkami)
+  np. http://localhost:5173,https://localhost:5173.
+
 Wymagane przy profilu `azure` (integracja z Azure Blob Storage i Azure Communication Email):
 
 - `BLOB_STORAGE_CONNECTION_STRING` - connection string do kontenera Blob Storage.

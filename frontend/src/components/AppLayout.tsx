@@ -1,12 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
+import { userService } from "../services/userService";
 import "../styles/dashboard.css";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
 
-  const logout = () => {
-    // TODO: usunięcie tokena
-    navigate("/login");
+  const logout = async () => {
+    try {
+      await userService.logout();
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      navigate("/login");
+    }
   };
 
   return (

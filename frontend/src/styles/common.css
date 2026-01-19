@@ -1,0 +1,121 @@
+/* Komunikaty błędów */
+.error-message {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Komunikat ładowania */
+.loading-message {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Komunikat pustej listy */
+.empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+  font-size: 1rem;
+}
+
+/* Sekcja modala */
+.modal-section {
+  margin: 1.5rem 0;
+}
+
+.modal-section h3 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+/* Lista załączników */
+.attachments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.attachment-item {
+  padding: 0.5rem 1rem;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #0066cc;
+  transition: background-color 0.2s;
+}
+
+.attachment-item:hover {
+  background-color: #e8e8e8;
+}
+
+/* Lista komentarzy */
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comment-item {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border-left: 3px solid #0066cc;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.comment-header strong {
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.comment-date {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.comment-item p {
+  margin: 0;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Ocena gwiazdkami */
+.rating-section {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+  padding: 0;
+}
+
+.star-btn:hover,
+.star-btn.active {
+  opacity: 1;
+}
+
+/* Tekst wyciszony */
+.muted {
+  color: #999;
+  font-style: italic;
+}

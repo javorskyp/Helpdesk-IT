@@ -1,24 +1,14 @@
 import { useState } from "react";
+import { statusLabels, formatDate, formatFileSize } from "../utils/helpers";
+import { fileService } from "../services/fileService";
+import type { Ticket, TicketStatus } from "../types";
 import "../styles/ticket-modal.css";
-
-
-type Status = "Otwarte" | "W trakcie" | "Zamknięte";
-type Priority = "Wysoki" | "Średni" | "Niski";
-
-type Ticket = {
-  id: number;
-  title: string;
-  description: string;
-  status: Status;
-  priority: Priority;
-  date: string;
-};
 
 type Props = {
   ticket: Ticket;
   onClose: () => void;
-  onUpdate: (data: { status: Status; priority: Priority; note: string }) => void;
-  onDelete: () => void;
+  onUpdate: (data: { status: TicketStatus; note: string }) => void;
+  onDelete?: () => void;
 };
 
 export default function TicketModal({
@@ -27,12 +17,10 @@ export default function TicketModal({
   onUpdate,
   onDelete,
 }: Props) {
-  const [status, setStatus] = useState<Status>(ticket.status);
-  const [priority, setPriority] = useState<Priority>(ticket.priority);
+  const [status, setStatus] = useState<TicketStatus>(ticket.status);
   const [note, setNote] = useState("");
 
-  const hasChanges =
-    status !== ticket.status || priority !== ticket.priority || note.length > 0;
+  const hasChanges = status !== ticket.status || note.length > 0;
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -43,52 +31,85 @@ export default function TicketModal({
 
         <p className="modal-desc">{ticket.description}</p>
 
-        {/* status/priority */}
+        {/* Za\u0142\u0105czniki */}
+        {ticket.attachments && ticket.attachments.length > 0 && (
+          <div className="modal-section">
+            <label>Za\u0142\u0105czniki</label>
+            <div className="attachments-list">
+              {ticket.attachments.map((attachment) => (
+                <a
+                  key={attachment.id}
+                  href={fileService.getDownloadUrl(attachment.id)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="attachment-item"
+                >
+                  {attachment.filename} ({formatFileSize(attachment.size)})
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Komentarze */}
+        {ticket.comments && ticket.comments.length > 0 && (
+          <div className="modal-section">
+            <label>Komentarze</label>
+            <div className="comments-list">
+              {ticket.comments.map((comment) => (
+                <div key={comment.id} className="comment-item">
+                  <div className="comment-header">
+                    <strong>{comment.authorEmail}</strong>
+                    <span className="comment-date">
+                      {formatDate(comment.createdAt)}
+                    </span>
+                  </div>
+                  <p>{comment.content}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Status */}
         <div className="modal-selects">
           <div>
             <label>Status</label>
-            <select value={status} onChange={(e) => setStatus(e.target.value as Status)}>
-              <option>Otwarte</option>
-              <option>W trakcie</option>
-              <option>Zamknięte</option>
-            </select>
-          </div>
-
-          <div>
-            <label>Priorytet</label>
             <select
-              value={priority}
-              onChange={(e) => setPriority(e.target.value as Priority)}
+              value={status}
+              onChange={(e) => setStatus(e.target.value as TicketStatus)}
             >
-              <option>Wysoki</option>
-              <option>Średni</option>
-              <option>Niski</option>
+              <option value="OPEN">{statusLabels.OPEN}</option>
+              <option value="IN_PROGRESS">{statusLabels.IN_PROGRESS}</option>
+              <option value="CLOSED">{statusLabels.CLOSED}</option>
             </select>
           </div>
         </div>
 
-        {/* note */}
+        {/* Nowy komentarz */}
         <textarea
           className="modal-textarea"
-          placeholder="Dodaj komentarz / notatkę serwisową..."
+          placeholder="Dodaj komentarz / notatk\u0119 serwisow\u0105..."
           value={note}
           onChange={(e) => setNote(e.target.value)}
         />
 
-        {/* actions */}
+        {/* Actions */}
         <div className="modal-actions space-between">
-          <button className="danger-btn" onClick={onDelete}>
-            Usuń zgłoszenie
-          </button>
+          {onDelete && (
+            <button className="danger-btn" onClick={onDelete}>
+              Usu\u0144 zg\u0142oszenie
+            </button>
+          )}
 
-          <div>
+          <div style={{ marginLeft: "auto" }}>
             <button className="secondary-btn" onClick={onClose}>
               Anuluj
             </button>
             <button
               className="primary-btn"
               disabled={!hasChanges}
-              onClick={() => onUpdate({ status, priority, note })}
+              onClick={() => onUpdate({ status, note })}
             >
               Zapisz zmiany
             </button>

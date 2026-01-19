@@ -1,0 +1,24 @@
+# Azure Static Web Apps configuration
+# https://docs.microsoft.com/azure/static-web-apps/configuration
+
+routes:
+  - route: "/api/*"
+    allowedRoles:
+      - authenticated
+  - route: "/*"
+    serve: /index.html
+    statusCode: 200
+
+navigationFallback:
+  rewrite: /index.html
+  exclude:
+    - /assets/*
+    - "*.{css,scss,js,png,jpg,gif,svg,ico,woff,woff2,ttf,eot}"
+
+platform:
+  apiRuntime: "node:18"
+
+globalHeaders:
+  "X-Content-Type-Options": "nosniff"
+  "X-Frame-Options": "DENY"
+  "X-XSS-Protection": "1; mode=block"

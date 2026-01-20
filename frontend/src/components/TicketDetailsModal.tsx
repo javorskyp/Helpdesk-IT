@@ -95,7 +95,7 @@ export default function TicketDetailsModal({ ticket, onClose, onUpdate }: Props)
         {/* Ocena */}
         {canRate && (
           <div className="modal-section">
-            <h3>Oce\u0144 rozwi\u0105zanie</h3>
+            <h3>Oceń rozwiązanie</h3>
             <div className="rating-section">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
@@ -103,7 +103,7 @@ export default function TicketDetailsModal({ ticket, onClose, onUpdate }: Props)
                   className={`star-btn ${star <= rating ? "active" : ""}`}
                   onClick={() => setRating(star)}
                 >
-                  \u2b50
+                  ⭐
                 </button>
               ))}
             </div>
@@ -112,14 +112,14 @@ export default function TicketDetailsModal({ ticket, onClose, onUpdate }: Props)
               disabled={rating === 0 || submittingRating}
               onClick={handleRatingSubmit}
             >
-              {submittingRating ? "Wysy\u0142anie..." : "Wy\u015blij ocen\u0119"}
+              {submittingRating ? "Wysyłanie..." : "Wyślij ocenę"}
             </button>
           </div>
         )}
 
         {ticket.rating && (
           <div className="modal-section">
-            <p>Twoja ocena: \u2b50 {ticket.rating}/5</p>
+            <p>Twoja ocena: ⭐ {ticket.rating}/5</p>
           </div>
         )}
 

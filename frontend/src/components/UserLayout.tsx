@@ -1,10 +1,25 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { userService } from "../services/userService";
+import type { User } from "../types";
 import "../styles/dashboard.css";
 
 export default function UserLayout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await userService.getCurrentUser();
+        setCurrentUser(user);
+      } catch (error) {
+        console.error("Failed to fetch current user:", error);
+      }
+    };
+    fetchUser();
+  }, []);
 
   const logout = async () => {
     try {
@@ -23,9 +38,16 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="app-wrapper">
       <header className="dashboard-navbar">
-        <Link to="/user" className="logo logo-link">
-          Helpdesk IT
-        </Link>
+        <div className="navbar-left">
+          <Link to="/user" className="logo logo-link">
+            Helpdesk IT
+          </Link>
+          {currentUser && (
+            <span className="user-name">
+              {currentUser.firstName} {currentUser.lastName}
+            </span>
+          )}
+        </div>
 
         <nav className="nav">
           <Link 

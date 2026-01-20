@@ -17,6 +17,12 @@ body {
   padding: 0 48px;
 }
 
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .logo-link {
   color: white;
   text-decoration: none;
@@ -28,6 +34,13 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.user-name {
+  color: #cbd5f5;
+  font-size: 14px;
+  padding: 0 8px;
+  white-space: nowrap;
 }
 
 .nav-btn {

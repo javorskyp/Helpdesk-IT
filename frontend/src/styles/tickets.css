@@ -92,6 +92,10 @@
   background: linear-gradient(135deg, #eab308, #ca8a04);
 }
 
+.status.wyslano {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+}
+
 .status.zamknięte {
   background: linear-gradient(135deg, #22c55e, #16a34a);
 }

@@ -1,6 +1,6 @@
 // Typy danych używane w aplikacji
 
-export type TicketStatus = "OPEN" | "IN_PROGRESS" | "CLOSED";
+export type TicketStatus = "OPEN" | "IN_PROGRESS" | "CLOSED" | "WAITING_FOR_ADMIN_RESPONSE";
 
 export interface TicketComment {
   id: number;
@@ -47,6 +47,8 @@ export interface TicketRatingRequest {
 export interface User {
   email: string;
   role: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface RegisterUserRequest {

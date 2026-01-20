@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { statusLabels, formatDate, formatFileSize } from "../utils/helpers";
+import { statusLabels } from "../utils/helpers";
 import { fileService } from "../services/fileService";
 import type { Ticket, TicketStatus } from "../types";
 import "../styles/ticket-modal.css";
@@ -67,9 +67,6 @@ export default function TicketModal({
                 <div key={comment.id} className="comment-item">
                   <div className="comment-header">
                     <strong>{comment.authorEmail}</strong>
-                    <span className="comment-date">
-                      {formatDate(comment.createdAt)}
-                    </span>
                   </div>
                   <p>{comment.content}</p>
                 </div>
@@ -96,7 +93,7 @@ export default function TicketModal({
         {/* Nowy komentarz */}
         <textarea
           className="modal-textarea"
-          placeholder="Dodaj komentarz / notatk\u0119 serwisow\u0105..."
+          placeholder="Dodaj komentarz / notatkę serwisową..."
           value={note}
           onChange={(e) => setNote(e.target.value)}
         />
@@ -105,7 +102,7 @@ export default function TicketModal({
         <div className="modal-actions space-between">
           {onDelete && (
             <button className="danger-btn" onClick={onDelete}>
-              Usu\u0144 zg\u0142oszenie
+              Usuń zgłoszenie
             </button>
           )}
 

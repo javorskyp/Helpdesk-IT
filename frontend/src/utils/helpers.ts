@@ -5,6 +5,7 @@ export const statusLabels: Record<TicketStatus, string> = {
   OPEN: 'Otwarte',
   IN_PROGRESS: 'W trakcie',
   CLOSED: 'Zamknięte',
+  WAITING_FOR_ADMIN_RESPONSE: 'Wysłano',
 };
 
 // Mapowanie statusów na klasy CSS
@@ -12,6 +13,7 @@ export const statusClassNames: Record<TicketStatus, string> = {
   OPEN: 'otwarte',
   IN_PROGRESS: 'w-trakcie',
   CLOSED: 'zamknięte',
+  WAITING_FOR_ADMIN_RESPONSE: 'wyslano',
 };
 
 // Formatowanie daty

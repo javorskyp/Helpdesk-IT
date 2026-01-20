@@ -8,6 +8,8 @@ export default function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -17,7 +19,7 @@ export default function Register() {
     setLoading(true);
 
     try {
-      await userService.register({ email, password });
+      await userService.register({ email, password, firstName, lastName });
       // Po udanej rejestracji przekieruj do logowania
       navigate("/login", { 
         state: { message: "Rejestracja udana! Możesz się teraz zalogować." } 
@@ -39,6 +41,22 @@ export default function Register() {
           {error && <div className="error-message">{error}</div>}
 
           <input 
+            type="text" 
+            placeholder="Imię"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+            disabled={loading}
+          />
+          <input 
+            type="text" 
+            placeholder="Nazwisko"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+            disabled={loading}
+          />
+          <input 
             type="email" 
             placeholder="Adres e-mail"
             value={email}
@@ -48,11 +66,11 @@ export default function Register() {
           />
           <input 
             type="password" 
-            placeholder="Hasło"
+            placeholder="Hasło (min. 8 znaków)"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            minLength={6}
+            minLength={8}
             disabled={loading}
           />
 

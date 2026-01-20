@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { statusLabels, statusClassNames, formatDate, formatFileSize } from "../utils/helpers";
+import { statusLabels, statusClassNames, formatFileSize } from "../utils/helpers";
 import { fileService } from "../services/fileService";
 import { ticketService } from "../services/ticketService";
 import type { Ticket } from "../types";
@@ -45,10 +45,10 @@ export default function TicketDetailsModal({ ticket, onClose, onUpdate }: Props)
           </span>
         </div>
 
-        {/* Za\u0142\u0105czniki */}
+        {/* Załączniki */}
         {ticket.attachments && ticket.attachments.length > 0 && (
           <div className="modal-section">
-            <h3>Za\u0142\u0105czniki</h3>
+            <h3>Załączniki</h3>
             <div className="attachments-list">
               {ticket.attachments.map((attachment) => (
                 <a
@@ -77,9 +77,6 @@ export default function TicketDetailsModal({ ticket, onClose, onUpdate }: Props)
                 <div key={comment.id} className="comment-item">
                   <div className="comment-header">
                     <strong>{comment.authorEmail}</strong>
-                    <span className="comment-date">
-                      {formatDate(comment.createdAt)}
-                    </span>
                   </div>
                   <p>{comment.content}</p>
                 </div>

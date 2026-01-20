@@ -7,6 +7,7 @@ import Tickets from "./pages/Tickets";
 import NewTicket from "./pages/NewTicket";
 import UserDashboard from "./pages/UserDashboard";
 import MyTickets from "./pages/MyTickets";
+import UserNewTicket from "./pages/UserNewTicket";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 
@@ -64,7 +65,7 @@ export default function App() {
         path="/user/new" 
         element={
           <ProtectedRoute>
-            <NewTicket />
+            <UserNewTicket />
           </ProtectedRoute>
         } 
       />

@@ -1,9 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { userService } from "../services/userService";
 import "../styles/dashboard.css";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const logout = async () => {
     try {
@@ -15,6 +16,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const isActive = (path: string) => {
+    return location.pathname === path || location.pathname.startsWith(path + "/");
+  };
+
   return (
     <div className="app-wrapper">
       <header className="dashboard-navbar">
@@ -23,8 +28,18 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </Link>
 
         <nav className="nav">
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/tickets">Zgłoszenia</Link>
+          <Link 
+            to="/dashboard" 
+            className={`nav-btn ${location.pathname === "/dashboard" ? "active" : ""}`}
+          >
+            Dashboard
+          </Link>
+          <Link 
+            to="/tickets" 
+            className={`nav-btn ${isActive("/tickets") ? "active" : ""}`}
+          >
+            Zgłoszenia
+          </Link>
           <button onClick={logout} className="link-btn">Wyloguj</button>
         </nav>
       </header>

@@ -31,10 +31,10 @@ export default function TicketModal({
 
         <p className="modal-desc">{ticket.description}</p>
 
-        {/* Za\u0142\u0105czniki */}
+        {/* Załączniki */}
         {ticket.attachments && ticket.attachments.length > 0 && (
           <div className="modal-section">
-            <label>Za\u0142\u0105czniki</label>
+            <label>Załączniki</label>
             <div className="attachments-list">
               {ticket.attachments.map((attachment) => (
                 <a

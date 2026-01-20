@@ -49,8 +49,12 @@
   border-radius: 6px;
   text-decoration: none;
   color: #0066cc;
-  transition: all 0.2s;
-}
+  transition: all 0.2s;  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: left;
+  width: 100%;
+  display: block;}
 
 .attachment-item:hover {
   background-color: rgba(0, 0, 0, 0.06);
@@ -86,7 +90,7 @@
 
 .comment-item p {
   margin: 0;
-  color: #555;
+  color: #b1b1b1;
   line-height: 1.5;
 }
 

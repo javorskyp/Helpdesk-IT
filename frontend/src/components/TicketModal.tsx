@@ -36,17 +36,24 @@ export default function TicketModal({
           <div className="modal-section">
             <label>Załączniki</label>
             <div className="attachments-list">
-              {ticket.attachments.map((attachment) => (
-                <a
-                  key={attachment.id}
-                  href={fileService.getDownloadUrl(attachment.id)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="attachment-item"
-                >
-                  {attachment.filename} ({formatFileSize(attachment.size)})
-                </a>
-              ))}
+              {ticket.attachments.map((attachment) => {
+                const fileId = attachment.fileId;
+                const fileName = attachment.filename;
+                return (
+                  <button
+                    key={attachment.fileId}
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      console.log('Clicking attachment:', fileId, fileName);
+                      await fileService.downloadFile(fileId, fileName);
+                    }}
+                    className="attachment-item"
+                    type="button"
+                  >
+                    {attachment.filename}
+                  </button>
+                );
+              })}
             </div>
           </div>
         )}

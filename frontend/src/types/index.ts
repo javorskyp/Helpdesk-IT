@@ -10,11 +10,11 @@ export interface TicketComment {
 }
 
 export interface TicketAttachment {
-  id: string;
+  fileId: string;
   filename: string;
-  contentType: string;
-  size: number;
-  uploadedAt: string;
+  contentType?: string;
+  size?: number;
+  uploadedAt?: string;
 }
 
 export interface Ticket {

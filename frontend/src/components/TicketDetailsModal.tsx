@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { statusLabels, statusClassNames, formatFileSize } from "../utils/helpers";
+import { statusLabels, statusClassNames} from "../utils/helpers";
 import { fileService } from "../services/fileService";
 import { ticketService } from "../services/ticketService";
 import type { Ticket } from "../types";
